@@ -6,30 +6,32 @@ CFLAGS = -Wall -Werror -Wextra
 
 DEBUG = -g
 
-SRCS = main.cpp Animal.cpp
+SRCS = main.cpp Animal.cpp Cat.cpp Dog.cpp
 
-OBJS = $(SRCS:.cpp=.o)
+OBJ_DIR = objects
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
-$(NAME) : $(OBJS)
+$(NAME): $(OBJS)
 	@echo Compiling...
 	@$(CC) $(DEBUG) $(CFLAGS) $^ -o $@
 
-%.o:%.cpp
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(DEBUG) $(CFLAGS) -c $< -o $@
 
-all : $(NAME)
+all: $(NAME)
 
-clean :
+clean:
 	@echo Deleting objects...
-	@rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
 
-fclean : clean
+fclean: clean
 	@echo Deleting executable...
 	@rm -f $(NAME)
 
-superclean : fclean
+superclean: fclean
 	@rm -f *.txt
 
-re: clean all
+re: fclean all
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re

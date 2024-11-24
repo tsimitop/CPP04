@@ -1,15 +1,9 @@
 #include "Animal.hpp"
 
 // Default constructor
-Animal::Animal() : _type("Default Type")
+Animal::Animal() : _type("Animal")
 {
 	std::cout << "Animal: Default constructor called." << std::endl;
-}
-
-// Parameterized constructor
-Animal::Animal(std::string type) : _type(type)
-{
-    std::cout << "Animal: Parameterized constructor called." << std::endl;
 }
 
 // Destructor
@@ -52,7 +46,7 @@ Animal& Animal::operator=(Animal&& other) noexcept
 	return (*this);
 }
 
-std::string	Animal::getType()
+std::string	Animal::getType() const
 {
 	return (this->_type);
 }
@@ -62,3 +56,7 @@ void	Animal::setType(std::string type)
 	_type = type;
 }
 
+void	Animal::makeSound() const
+{
+	std::cout << "Animal sound\n";
+}
