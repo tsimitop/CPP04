@@ -2,9 +2,12 @@
 #define CAT_H
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat : public Animal
 {
+private:
+	Brain*	_brain;
 public:
 	Cat();									//Default constructor
 	Cat(const Cat& other);					//Copy constructor
