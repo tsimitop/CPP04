@@ -14,6 +14,10 @@ public:
 	Brain(Brain&& other) noexcept;				//Move constructor
 	Brain& operator=(Brain&& other) noexcept;	//Move assigment operator
 	~Brain();									//Default Destructor
+
+	void	setIdeas(std::string idea);
+	void	printIdeas() const;
+
 };
 
 #endif

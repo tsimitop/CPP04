@@ -21,6 +21,9 @@ public:
 
 	// virtual void	makeSound() const = 0;	// cannot declare animal
 	virtual void	makeSound() const;	// cannot declare animal
+	virtual void	printIdeas() const;
+	virtual void	setIdeas(std::string idea);
+
 };
 
 #endif

@@ -34,8 +34,8 @@ Cat& Cat::operator=(const Cat& other)
 Cat::Cat(Cat&& other) noexcept
 {
 	std::cout << "Cat: Move constructor called\n";
-	this->_type = other._type;
-	other._type = "Moved";
+	this->_type = std::move(other._type);
+	other._type.clear();
 }
 
 // Move assignment constructor
@@ -44,8 +44,8 @@ Cat& Cat::operator=(Cat&& other) noexcept
 	std::cout << "Cat: Move assignment operator called\n";
 	if (this == &other)
 		return (*this);
-	this->_type = other._type;
-	other._type = "Moved";
+	this->_type = std::move(other._type);
+	other._type.clear();
 	return (*this);
 }
 

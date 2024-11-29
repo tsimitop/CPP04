@@ -34,8 +34,9 @@ Dog& Dog::operator=(const Dog& other)
 Dog::Dog(Dog&& other) noexcept
 {
 	std::cout << "Dog: Move constructor called\n";
-	this->_type = other._type;
-	other._type = "Moved";
+	// this->_type = other._type;
+	this->_type = std::move(other._type);
+	other._type.clear();
 }
 
 // Move assignment constructor
@@ -44,8 +45,8 @@ Dog& Dog::operator=(Dog&& other) noexcept
 	std::cout << "Dog: Move assignment operator called\n";
 	if (this == &other)
 		return (*this);
-	this->_type = other._type;
-	other._type = "Moved";
+	this->_type = std::move(other._type);
+	other._type.clear();
 	return (*this);
 }
 

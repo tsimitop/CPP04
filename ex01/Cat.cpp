@@ -1,8 +1,8 @@
 #include "Cat.hpp"
 #include "Brain.hpp"
 
-#define catColor "\033[34m";
-#define quitColor "\033[0m";
+#define catColor "\033[34m"
+#define quitColor "\033[0m"
 
 // Default constructor
 Cat::Cat()
@@ -28,7 +28,9 @@ Cat::Cat(const Cat& other) : Animal(other)
 {
 	std::cout << catColor;
 	std::cout << "Cat: Copy constructor called.\n";
-	*this = other;
+	// *this = other;
+	_type = other._type;
+	_brain = new Brain(*other._brain);
 	std::cout << quitColor;
 }
 
@@ -38,10 +40,13 @@ Cat& Cat::operator=(const Cat& other)
 	std::cout << catColor;
 	std::cout << "Cat: Copy assignment operator called.\n";
 	if (this == &other)
+	{
+		std::cout << quitColor;
 		return (*this);
+	}
     _type = other._type;
-	return (*this);
 	std::cout << quitColor;
+	return (*this);
 }
 
 // Move constructor
@@ -49,8 +54,8 @@ Cat::Cat(Cat&& other) noexcept
 {
 	std::cout << catColor;
 	std::cout << "Cat: Move constructor called\n";
-	this->_type = other._type;
-	other._type = "Moved";
+	this->_type = std::move(other._type);
+	other._type.clear();
 	std::cout << quitColor;
 }
 
@@ -60,11 +65,14 @@ Cat& Cat::operator=(Cat&& other) noexcept
 	std::cout << catColor;
 	std::cout << "Cat: Move assignment operator called\n";
 	if (this == &other)
+	{
+		std::cout << quitColor;
 		return (*this);
-	this->_type = other._type;
-	other._type = "Moved";
-	return (*this);
+	}
+	this->_type = std::move(other._type);
+	other._type.clear();
 	std::cout << quitColor;
+	return (*this);
 }
 
 void	Cat::makeSound() const

@@ -1,7 +1,7 @@
 #include "Dog.hpp"
 
-#define dogColor "\033[32m";
-#define quitColor "\033[0m";
+#define dogColor "\033[32m"
+#define quitColor "\033[0m"
 
 // Default constructor
 Dog::Dog()
@@ -27,7 +27,9 @@ Dog::Dog(const Dog& other) : Animal(other)
 {
 	std::cout << dogColor;
 	std::cout << "Dog: Copy constructor called.\n";
-	*this = other;
+	// *this = other;
+	_type = other._type;
+	_brain = new Brain(*other._brain);
 	std::cout << quitColor;
 }
 
@@ -37,10 +39,13 @@ Dog& Dog::operator=(const Dog& other)
 	std::cout << dogColor;
 	std::cout << "Dog: Copy assignment operator called.\n";
 	if (this == &other)
+	{
+		std::cout << quitColor;
 		return (*this);
+	}
     _type = other._type;
-	return (*this);
 	std::cout << quitColor;
+	return (*this);
 }
 
 // Move constructor
@@ -48,8 +53,9 @@ Dog::Dog(Dog&& other) noexcept
 {
 	std::cout << dogColor;
 	std::cout << "Dog: Move constructor called\n";
-	this->_type = other._type;
-	other._type = "Moved";
+	// this->_type = other._type;
+	this->_type = std::move(other._type);
+	other._type.clear();
 	std::cout << quitColor;
 }
 
@@ -59,11 +65,14 @@ Dog& Dog::operator=(Dog&& other) noexcept
 	std::cout << dogColor;
 	std::cout << "Dog: Move assignment operator called\n";
 	if (this == &other)
+	{
+		std::cout << quitColor;
 		return (*this);
-	this->_type = other._type;
-	other._type = "Moved";
-	return (*this);
+	}
+	this->_type = std::move(other._type);
+	other._type.clear();
 	std::cout << quitColor;
+	return (*this);
 }
 
 void	Dog::makeSound() const

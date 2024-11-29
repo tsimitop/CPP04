@@ -17,6 +17,7 @@ public:
 	~Dog();									//Default Destructor
 
 	void	makeSound() const;
+	// void	
 };
 
 #endif

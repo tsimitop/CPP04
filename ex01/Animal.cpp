@@ -33,18 +33,22 @@ Animal& Animal::operator=(const Animal& other)
 	std::cout << animalColor;
 	std::cout << "Animal: Copy assignment operator called." << std::endl;
 	if (this == &other)
+	{
+		std::cout << quitColor;
 		return (*this);
+	}
     _type = other._type;
-	return (*this);
 	std::cout << quitColor;
+	return (*this);
 }
 
 // Move constructor
-Animal::Animal(Animal&& other) noexcept : _type(other._type)
+Animal::Animal(Animal&& other) noexcept
 {
 	std::cout << animalColor;
 	std::cout << "Animal: Move constructor called\n";
-	other._type = "Moved";
+	this->_type = std::move(other._type);
+	other._type.clear();
 	std::cout << quitColor;
 }
 
@@ -54,11 +58,14 @@ Animal& Animal::operator=(Animal&& other) noexcept
 	std::cout << animalColor;
 	std::cout << "Animal: Move assignment operator called\n";
 	if (this == &other)
+	{
+		std::cout << quitColor;
 		return (*this);
-	_type = other._type;
-	other._type = "Moved";
-	return (*this);
+	}
+	this->_type = std::move(other._type);
+	other._type.clear();
 	std::cout << quitColor;
+	return (*this);
 }
 
 std::string	Animal::getType() const
@@ -75,5 +82,19 @@ void	Animal::makeSound() const
 {
 	std::cout << animalColor;
 	std::cout << "Animal sound\n";
+	std::cout << quitColor;
+}
+
+void	Animal::printIdeas() const
+{
+	std::cout << animalColor;
+	std::cout << "printIdeas\n";
+	std::cout << quitColor;
+}
+
+void	Animal::setIdeas(std::string idea)
+{
+	std::cout << animalColor;
+	std::cout << idea;
 	std::cout << quitColor;
 }
