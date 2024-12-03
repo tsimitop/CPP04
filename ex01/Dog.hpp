@@ -17,7 +17,8 @@ public:
 	~Dog();									//Default Destructor
 
 	void	makeSound() const;
-	// void	
+	void	putIdea(std::string idea); // Give index between 0-99
+	void	printFirstIdea();
 };
 
 #endif

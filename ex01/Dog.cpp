@@ -81,3 +81,13 @@ void	Dog::makeSound() const
 	std::cout << "bark bark\n";
 	std::cout << quitColor;
 }
+
+void	Dog::putIdea(std::string idea)
+{
+	_brain->setIdeas(idea);
+}
+
+void	Dog::printFirstIdea()
+{
+	_brain->printFirstIdea();
+}

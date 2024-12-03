@@ -92,3 +92,8 @@ void	Brain::printIdeas() const
 	for (int i = 0; i < 100; i++)
 		std::cout << _ideas[i] << std::endl;
 }
+
+void	Brain::printFirstIdea()
+{
+	std::cout << "First idea is:\t" << this->_ideas[0] << std::endl;
+}
