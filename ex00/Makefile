@@ -2,7 +2,7 @@ NAME = exec
 
 CC = c++
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -std=c++17
 
 DEBUG = -g
 
