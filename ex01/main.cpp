@@ -5,14 +5,14 @@
 #include "WrongCat.hpp"
 #include "Brain.hpp"
 
-void	leaks(void)
-{
-	system("leak exec");
-}
+// void	leaks(void)
+// {
+// 	system("leak exec");
+// }
 
 int main()
 {
-	atexit(&leaks);
+	// atexit(&leaks);
 	int	counter = 2;
 	int i = 0;
 	int n = 0;
@@ -26,8 +26,7 @@ int main()
 	for (i = 0; i < (counter / 2); i++)
 	{
 		for (n = 0; n < 100; n++)
-			fillAnimal[i]->setIdeas("Dog ideas, bark bark");
-			// fillAnimal[i]->printIdeas();
+			fillAnimal[i]->setIdeas("Dog ideas, bark bark\n");
 	}
 
 
