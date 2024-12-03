@@ -7,15 +7,14 @@
 
 // void	leaks(void)
 // {
-// 	system("leak exec");
+// 	system("leaks exec");
 // }
 
 int main()
 {
 	// atexit(&leaks);
-	int	counter = 2;
+	int	counter = 6;
 	int i = 0;
-	int n = 0;
 
 	// const Animal* j = new Dog();
 	// const Animal* k = new Cat();
@@ -23,21 +22,23 @@ int main()
 
 	for (i = 0; i < (counter / 2); i++)
 		fillAnimal[i] = new Dog();
-	for (i = 0; i < (counter / 2); i++)
-	{
-		for (n = 0; n < 100; n++)
-			fillAnimal[i]->setIdeas("Dog ideas, bark bark\n");
-	}
+
+	// int n = 0;	//Fill brain with ideas if you like
+	// for (i = 0; i < (counter / 2); i++) //fill dog brain
+	// {
+	// 	for (n = 0; n < 100; n++)
+	// 		fillAnimal[i]->setIdeas("Dog ideas, bark bark\n");
+	// }
 
 
 	for (i = (counter / 2); i < counter; i++)
 		fillAnimal[i] = new Cat();
 
 	for (i = 0; i < counter; i++)
-		fillAnimal[i]->makeSound();
+		fillAnimal[i]->makeSound(); //Dog sound
 
 	for (i = 0; i < counter; i++)
-		delete fillAnimal[i];
+		delete fillAnimal[i]; //Cat sound
 
 	// j->makeSound();
 	// k->makeSound();

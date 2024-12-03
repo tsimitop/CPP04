@@ -43,7 +43,7 @@ Dog& Dog::operator=(const Dog& other)
 		std::cout << quitColor;
 		return (*this);
 	}
-    _type = other._type;
+	_type = other._type;
 	std::cout << quitColor;
 	return (*this);
 }
