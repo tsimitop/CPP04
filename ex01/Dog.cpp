@@ -18,7 +18,8 @@ Dog::~Dog()
 {
 	std::cout << dogColor;
 	std::cout << "Dog: Destructor called.\n";
-	delete _brain;
+	if(_brain)
+		delete _brain;
 	std::cout << quitColor;
 }
 
@@ -27,9 +28,11 @@ Dog::Dog(const Dog& other) : Animal(other)
 {
 	std::cout << dogColor;
 	std::cout << "Dog: Copy constructor called.\n";
-	// *this = other;
 	_type = other._type;
-	_brain = new Brain(*other._brain);
+	if (other._brain)
+		_brain = new Brain(*other._brain);
+	else
+		_brain = nullptr;
 	std::cout << quitColor;
 }
 
@@ -41,11 +44,20 @@ Dog& Dog::operator=(const Dog& other)
 	if (this == &other)
 	{
 		std::cout << quitColor;
-		return (*this);
+		return *this;
 	}
+
+	// Deep copy
+	if(_brain)
+		delete _brain;
+	if (other._brain)
+		_brain = new Brain(*other._brain);
+	else
+		_brain = nullptr;
 	_type = other._type;
+
 	std::cout << quitColor;
-	return (*this);
+	return *this;
 }
 
 // Move constructor
@@ -53,8 +65,8 @@ Dog::Dog(Dog&& other) noexcept
 {
 	std::cout << dogColor;
 	std::cout << "Dog: Move constructor called\n";
-	// this->_type = other._type;
 	this->_type = std::move(other._type);
+	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;
 }
@@ -69,7 +81,10 @@ Dog& Dog::operator=(Dog&& other) noexcept
 		std::cout << quitColor;
 		return (*this);
 	}
+	if(_brain)
+		delete _brain;
 	this->_type = std::move(other._type);
+	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;
 	return (*this);
@@ -87,7 +102,7 @@ void	Dog::putIdea(std::string idea)
 	_brain->setIdeas(idea);
 }
 
-void	Dog::printFirstIdea()
+void	Dog::printFirstIdea() const
 {
 	_brain->printFirstIdea();
 }

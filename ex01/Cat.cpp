@@ -19,7 +19,8 @@ Cat::~Cat()
 {
 	std::cout << catColor;
 	std::cout << "Cat: Destructor called.\n";
-	delete _brain;
+	if(_brain)
+		delete _brain;
 	std::cout << quitColor;
 }
 
@@ -28,9 +29,11 @@ Cat::Cat(const Cat& other) : Animal(other)
 {
 	std::cout << catColor;
 	std::cout << "Cat: Copy constructor called.\n";
-	// *this = other;
 	_type = other._type;
-	_brain = new Brain(*other._brain);
+	if (other._brain)
+		_brain = new Brain(*other._brain);
+	else
+		_brain = nullptr;
 	std::cout << quitColor;
 }
 
@@ -42,11 +45,20 @@ Cat& Cat::operator=(const Cat& other)
 	if (this == &other)
 	{
 		std::cout << quitColor;
-		return (*this);
+		return *this;
 	}
-    _type = other._type;
+
+	// Deep copy
+	if(_brain)
+		delete _brain;
+	if (other._brain)
+		_brain = new Brain(*other._brain);
+	else
+		_brain = nullptr;
+	_type = other._type;
+
 	std::cout << quitColor;
-	return (*this);
+	return *this;
 }
 
 // Move constructor
@@ -55,6 +67,7 @@ Cat::Cat(Cat&& other) noexcept
 	std::cout << catColor;
 	std::cout << "Cat: Move constructor called\n";
 	this->_type = std::move(other._type);
+	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;
 }
@@ -69,7 +82,10 @@ Cat& Cat::operator=(Cat&& other) noexcept
 		std::cout << quitColor;
 		return (*this);
 	}
+	if(_brain)
+		delete _brain;
 	this->_type = std::move(other._type);
+	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;
 	return (*this);
@@ -80,4 +96,14 @@ void	Cat::makeSound() const
 	std::cout << catColor;
 	std::cout << "Meeeooooowwwwww\n";
 	std::cout << quitColor;
+}
+
+void	Cat::putIdea(std::string idea)
+{
+	_brain->setIdeas(idea);
+}
+
+void	Cat::printFirstIdea() const
+{
+	_brain->printFirstIdea();
 }

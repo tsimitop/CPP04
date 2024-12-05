@@ -54,8 +54,7 @@ Brain::Brain(Brain&& other) noexcept
 	for (int i = 0; i < 100; i++)
 	{
 		this->_ideas[i] = std::move(other._ideas[i]);
-		// other._ideas[i] = "Moved";
-		other._ideas[i].clear(); // Optional: Clear moved-from state
+		other._ideas[i].clear();
 	}
 	std::cout << quitColor;
 }
@@ -73,8 +72,6 @@ Brain& Brain::operator=(Brain&& other) noexcept
 	for (int i = 0; i < 100; i++)
 	{
 		this->_ideas[i] = std::move(other._ideas[i]);
-		// this->_ideas[i] = other._ideas[i];
-		// other._ideas[i] = "Moved";
 		other._ideas[i].clear();
 	}
 	std::cout << quitColor;
@@ -93,7 +90,10 @@ void	Brain::printIdeas() const
 		std::cout << _ideas[i] << std::endl;
 }
 
-void	Brain::printFirstIdea()
+void	Brain::printFirstIdea() const
 {
-	std::cout << "First idea is:\t" << this->_ideas[0] << std::endl;
+	if (!this->_ideas || this->_ideas[0].empty())
+		std::cout << "First idea is:\tEmpty\n" << std::endl;
+	else
+		std::cout << "First idea is:\t" << this->_ideas[0] << std::endl;
 }

@@ -17,7 +17,7 @@ public:
 
 	void	setIdeas(std::string idea);
 	void	printIdeas() const;
-	void	printFirstIdea();
+	void	printFirstIdea() const;
 
 };
 

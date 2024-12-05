@@ -16,8 +16,9 @@ void	leaks(void)
 // 	int	counter = 6;
 // 	int i = 0;
 
-// 	// const Animal* j = new Dog();
-// 	// const Animal* k = new Cat();
+// 	const Animal* j = new Dog();
+// 	const Animal* k = new Cat();
+
 // 	Animal* fillAnimal[counter];
 
 // 	for (i = 0; i < (counter / 2); i++)
@@ -40,98 +41,68 @@ void	leaks(void)
 // 	for (i = 0; i < counter; i++)
 // 		delete fillAnimal[i]; //Cat sound
 
-// 	// j->makeSound();
-// 	// k->makeSound();
+// 	j->makeSound();
+// 	k->makeSound();
 
-// 	// delete j;//should not create a leak
-// 	// delete k;
+// 	delete j;//should not create a leak
+// 	delete k;
 // 	return 0;
 // }
 
 //	TEST ALL CONSTRUCTOR KINDS
 int main()
 {
+	std::cout << "\n--------------------CONSTRUCTORS-------------------\n";
 	// atexit(&leaks);
-	// int	counter = 5;
-	// int i = 0;
-
-	// const Animal* j = new Dog();
-	// const Animal* k = new Cat();
-	// Animal* fillAnimal[5];
-	// fillAnimal[i] = new Dog;
-
 	std::cout << "0\n";
-	Dog* dog0 = new Dog;
-	std::cout << "1\n";
-	Dog* dog1 = dog0;
-	std::cout << "2\n";
-	Dog* dog2;
-	dog2 = dog1;
-	Dog* temp1 = new Dog;
-	Dog* temp2 = new Dog;
-	std::cout << "3\n";
-	Dog* dog3 = std::move(temp1);
-	std::cout << "4\n";
-	Dog* dog4;
-	dog4 = std::move(temp2);
+	Cat* Cat0 = new Cat;
+	std::cout << "\n1\n";
+	// Cat* Cat1(Cat0); // Ideas will get overwritten
+	// Cat Cat1(*Cat0); // Ideas will not get overwritten
+	Cat* Cat1 = new Cat(*Cat0); // Deep copy
+	std::cout << "\n2\n";
+	Cat* Cat2 = new Cat;
+	*Cat2 = *Cat1;
+	std::cout << "\ntemp1\n";
+	Cat* temp1 = new Cat;
+	std::cout << "\ntemp2\n";
+	Cat* temp2 = new Cat;
+	std::cout << "\n3\n";
+	Cat* Cat3 = new Cat(std::move(*temp1));
+	std::cout << "\n4\n";
+	Cat* Cat4 = new Cat;
+	*Cat4 = std::move(*temp2);
 
-	Dog dog5;
+	std::cout << "\n-----------------------SOUNDS----------------------\n";
+	Cat0->makeSound();
+	Cat1->makeSound();
+	Cat2->makeSound();
+	Cat3->makeSound();
+	Cat4->makeSound();
 
-dog0->makeSound();
-dog1->makeSound();
-dog2->makeSound();
-dog3->makeSound();
-dog4->makeSound();
+	std::cout << "\n-----------------------IDEAS-----------------------\n";
+	Cat0->putIdea("This Cat is 0\n");
+	Cat1->putIdea("This Cat is 1\n");
+	Cat2->putIdea("This Cat is 2\n");
+	Cat3->putIdea("This Cat is 3\n");
+	Cat4->putIdea("This Cat is 4\n");
 
-dog0->putIdea("This dog is 0\n");
-dog1->putIdea("This dog is 1\n");
-dog2->putIdea("This dog is 2\n");
-dog3->putIdea("This dog is 3\n");
-dog4->putIdea("This dog is 4\n");
+	Cat0->printFirstIdea();
+	Cat1->printFirstIdea();
+	Cat2->printFirstIdea();
+	Cat3->printFirstIdea();
+	Cat4->printFirstIdea();
 
-dog0->printFirstIdea();
-dog1->printFirstIdea();
-dog2->printFirstIdea();
-dog3->printFirstIdea();
-dog4->printFirstIdea();
+	std::cout << "--------------------DESTRUCTORS--------------------\n";
+	delete Cat0;
+	delete Cat1;
+	delete Cat2;
+	delete Cat3;
+	delete Cat4;
 
-	std::cout << "0\n";
-		delete dog0;
-	// std::cout << "1\n";
-	// 	delete dog1;
-	// std::cout << "2\n";
-	// 	delete dog2;
-	std::cout << "3\n";
-		delete dog3;
-	std::cout << "4\n";
-		delete dog4;
+	std::cout << "\nTemporary/moved.\n";
+	delete temp1;
+	delete temp2;
 
-
-
-	// for (i = 0; i < (counter / 2); i++)
-	// 	fillAnimal[i] = new Dog();
-
-	// int n = 0;	//Fill brain with ideas if you like
-	// for (i = 0; i < (counter / 2); i++) //fill dog brain
-	// {
-	// 	for (n = 0; n < 100; n++)
-	// 		fillAnimal[i]->setIdeas("Dog ideas, bark bark\n");
-	// }
-
-
-	// for (i = (counter / 2); i < counter; i++)
-	// 	fillAnimal[i] = new Cat();
-
-	// for (i = 0; i < counter; i++)
-	// 	fillAnimal[i]->makeSound(); //Dog sound
-
-	// for (i = 0; i < counter; i++)
-	// 	delete fillAnimal[i]; //Cat sound
-
-	// j->makeSound();
-	// k->makeSound();
-
-	// delete j;//should not create a leak
-	// delete k;
-	return 0;
+	return (0);
 }

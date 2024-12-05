@@ -17,6 +17,8 @@ public:
 	~Cat();									//Default Destructor
 
 	void	makeSound() const;
+	void	putIdea(std::string idea);
+	void	printFirstIdea() const;
 };
 
 #endif
