@@ -84,17 +84,3 @@ void	Animal::makeSound() const
 	std::cout << "Animal sound\n";
 	std::cout << quitColor;
 }
-
-void	Animal::printIdeas() const
-{
-	std::cout << animalColor;
-	std::cout << "printIdeas\n";
-	std::cout << quitColor;
-}
-
-void	Animal::setIdeas(std::string idea)
-{
-	std::cout << animalColor;
-	std::cout << idea;
-	std::cout << quitColor;
-}
