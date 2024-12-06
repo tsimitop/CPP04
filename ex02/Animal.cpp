@@ -37,7 +37,7 @@ Animal& Animal::operator=(const Animal& other)
 		std::cout << quitColor;
 		return (*this);
 	}
-    _type = other._type;
+	_type = other._type;
 	std::cout << quitColor;
 	return (*this);
 }
@@ -82,19 +82,5 @@ void	Animal::makeSound() const
 {
 	std::cout << animalColor;
 	std::cout << "Animal sound\n";
-	std::cout << quitColor;
-}
-
-void	Animal::printIdeas() const
-{
-	std::cout << animalColor;
-	std::cout << "printIdeas\n";
-	std::cout << quitColor;
-}
-
-void	Animal::setIdeas(std::string idea)
-{
-	std::cout << animalColor;
-	std::cout << idea;
 	std::cout << quitColor;
 }
