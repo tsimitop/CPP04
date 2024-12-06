@@ -62,11 +62,10 @@ Cat& Cat::operator=(const Cat& other)
 }
 
 // Move constructor
-Cat::Cat(Cat&& other) noexcept
+Cat::Cat(Cat&& other) noexcept : Animal(std::move(other))
 {
 	std::cout << catColor;
 	std::cout << "Cat: Move constructor called\n";
-	this->_type = std::move(other._type);
 	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;
@@ -84,7 +83,7 @@ Cat& Cat::operator=(Cat&& other) noexcept
 	}
 	if(_brain)
 		delete _brain;
-	this->_type = std::move(other._type);
+	Animal::operator=(std::move(other));
 	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;

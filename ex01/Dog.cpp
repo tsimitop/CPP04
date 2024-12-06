@@ -46,8 +46,6 @@ Dog& Dog::operator=(const Dog& other)
 		std::cout << quitColor;
 		return *this;
 	}
-
-	// Deep copy
 	if(_brain)
 		delete _brain;
 	if (other._brain)
@@ -61,11 +59,10 @@ Dog& Dog::operator=(const Dog& other)
 }
 
 // Move constructor
-Dog::Dog(Dog&& other) noexcept
+Dog::Dog(Dog&& other) noexcept : Animal(std::move(other))
 {
 	std::cout << dogColor;
 	std::cout << "Dog: Move constructor called\n";
-	this->_type = std::move(other._type);
 	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;
@@ -83,7 +80,7 @@ Dog& Dog::operator=(Dog&& other) noexcept
 	}
 	if(_brain)
 		delete _brain;
-	this->_type = std::move(other._type);
+	Animal::operator=(std::move(other));
 	this->_brain = new Brain (std::move(*other._brain));
 	other._type.clear();
 	std::cout << quitColor;

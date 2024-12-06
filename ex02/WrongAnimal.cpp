@@ -15,7 +15,7 @@ WrongAnimal::~WrongAnimal()
 // Copy constructor
 WrongAnimal::WrongAnimal(const WrongAnimal& other) : _type(other._type)
 {
-    std::cout << "WrongAnimal: Copy constructor called." << std::endl;
+	std::cout << "WrongAnimal: Copy constructor called." << std::endl;
 }
 
 // Copy assignment operator
@@ -24,7 +24,7 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& other)
 	std::cout << "WrongAnimal: Copy assignment operator called." << std::endl;
 	if (this == &other)
 		return (*this);
-    _type = other._type;
+	_type = other._type;
 	return (*this);
 }
 

@@ -92,7 +92,7 @@ void	Brain::printIdeas() const
 
 void	Brain::printFirstIdea() const
 {
-	if (!this->_ideas || this->_ideas[0].empty())
+	if (this->_ideas[0].empty())
 		std::cout << "First idea is:\tEmpty\n" << std::endl;
 	else
 		std::cout << "First idea is:\t" << this->_ideas[0] << std::endl;
