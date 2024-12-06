@@ -16,8 +16,8 @@ public:
 	Animal& operator=(Animal&& other) noexcept;	//Move assigment operator
 	virtual ~Animal();							//Default Destructor
 
-	virtual std::string	getType() const;
-	void	setType(std::string type);
+	std::string	getType() const;
+	void		setType(std::string type);
 
 	virtual void	makeSound() const;
 };

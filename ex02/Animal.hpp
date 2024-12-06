@@ -14,10 +14,10 @@ public:
 	Animal& operator=(const Animal& other);		//Copy assignment operator
 	Animal(Animal&& other) noexcept;			//Move constructor
 	Animal& operator=(Animal&& other) noexcept;	//Move assigment operator
-	virtual ~Animal();									//Default Destructor
+	virtual ~Animal();							//Default Destructor
 
-	virtual std::string	getType() const;
-	void	setType(std::string type);
+	std::string	getType() const;
+	void		setType(std::string type);
 
 	virtual void	makeSound() const = 0;	// cannot declare animal
 };
